@@ -1,0 +1,477 @@
+/* =============================================================
+   CONFLUÊNCIAS — slides.css
+   layouts de cena: capa · roteiro · capítulo · split · linha do tempo
+   espectro · comparação · galeria · citação · dados · encerramento
+   ============================================================= */
+
+/* ---------- base comum ---------- */
+.l-head { display: grid; gap: clamp(10px, 1.4vh, 20px); align-content: start; }
+.l-2col { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,.95fr); gap: clamp(24px, 3.4vw, 64px); align-items: center; }
+.l-2col--wide { grid-template-columns: minmax(0,1.25fr) minmax(0,.75fr); }
+.l-2col--art { grid-template-columns: minmax(0,.82fr) minmax(0,1.18fr); }
+.l-stack { display: grid; gap: clamp(10px, 1.5vh, 20px); align-content: center; }
+/* impede que uma faixa de itens (chips, tags) estique a coluna e a página toda */
+.l-2col > *, .l-chap > *, .l-stack > * { min-width: 0; }
+.l-sticky { align-content: start; }
+
+
+/* =============================================================
+   1. CAPA
+   ============================================================= */
+.l-cover { display: grid; grid-template-columns: minmax(0,1.06fr) minmax(0,.94fr); gap: clamp(16px, 2.4vw, 44px); align-items: end; }
+.l-cover__top { grid-column: 1 / -1; display: grid; gap: clamp(8px, 1.2vh, 16px); }
+.l-cover__t { display: grid; gap: clamp(10px, 1.6vh, 20px); }
+.l-cover__wm {
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800;
+  font-size: clamp(2.6rem, 9.4vw, 9.4rem); line-height: .84; letter-spacing: -.055em;
+}
+.l-cover__wm .l2 { color: var(--accent); }
+.l-cover__sub { font-size: clamp(1.05rem, 1.65vw, 1.5rem); line-height: 1.32; font-weight: 300; max-width: 30ch; }
+.l-cover__sub i { font-style: italic; color: var(--accent); }
+.l-cover__cast { display: flex; align-items: flex-end; align-self: end; gap: clamp(4px, 1vw, 18px); }
+.l-cover__cast .char { flex: 1 1 0; min-width: 0; }
+.l-cover__cast .char:nth-child(1) { width: 92%; }
+.l-cover__cast .char:nth-child(2) { width: 104%; }
+.l-cover__cast .char:nth-child(3) { width: 96%; }
+.l-cover__cast .char:nth-child(4) { width: 86%; }
+.l-cover__band {
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+}
+.l-cover__foot { display: flex; flex-wrap: wrap; gap: 14px 26px; align-items: center; margin-top: clamp(8px, 1.4vh, 18px); }
+.stripe {
+  height: 9px; border-radius: 2px; flex: 1 1 120px; overflow: hidden;
+  background: repeating-linear-gradient(90deg,
+    var(--accent) 0 10px, transparent 10px 16px,
+    var(--accent-2) 16px 30px, transparent 30px 40px);
+  opacity: .75; animation: weave 7s var(--e-io) infinite;
+}
+@keyframes weave { 0%, 100% { transform: translateX(0) } 50% { transform: translateX(20px) } }
+
+/* =============================================================
+   2. ROTEIRO / ÍNDICE
+   ============================================================= */
+.l-toc { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: clamp(10px, 1vw, 18px); }
+.l-toc__c {
+  position: relative; text-align: left; cursor: pointer;
+  padding: clamp(14px, 1.5vw, 24px); border: 1px solid var(--line); border-radius: var(--r);
+  background: var(--card); backdrop-filter: blur(12px); overflow: hidden;
+  display: grid; gap: 8px; align-content: start;
+  transition: transform .5s var(--e-out), border-color .4s, background .4s;
+}
+.l-toc__c::before {
+  content: ''; position: absolute; inset: 0 auto 0 0; width: 3px; background: var(--accent);
+  transform: scaleY(0); transform-origin: top; transition: transform .5s var(--e-out);
+}
+.l-toc__c:hover { transform: translateY(-6px); border-color: color-mix(in oklab, var(--accent) 50%, var(--line)); }
+.l-toc__c:hover::before, .l-toc__c.on::before { transform: scaleY(1); }
+.l-toc__n { font-family: 'Martian Mono', monospace; font-size: 11.5px; letter-spacing: .16em; color: var(--accent); display: flex; gap: 8px; align-items: center; }
+.l-toc__n i { flex: 1; height: 1px; background: var(--line-2); font-style: normal; }
+.l-toc__t { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: clamp(1.05rem, 1.7vw, 1.6rem); line-height: 1.02; letter-spacing: -.02em; }
+.l-toc__d { font-size: 1.04rem; line-height: 1.45; color: var(--fg-soft); }
+
+/* =============================================================
+   3. ABERTURA DE CAPÍTULO
+   ============================================================= */
+.l-chap { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,.9fr); gap: clamp(20px, 3vw, 60px); align-items: center; }
+.l-chap__id { display: flex; align-items: baseline; gap: clamp(10px, 1.4vw, 20px); margin-bottom: clamp(6px, 1vh, 14px); }
+.l-chap__nn {
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(2.6rem, 6vw, 5.6rem);
+  line-height: .8; color: transparent; -webkit-text-stroke: 1.5px var(--accent);
+}
+.l-chap__sc { font-family: 'Martian Mono', monospace; font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--fg-dim); }
+.l-chap__t { display: grid; gap: clamp(12px, 1.8vh, 24px); }
+.l-chap__d { display: flex; gap: clamp(8px, 1vw, 16px); flex-wrap: wrap; }
+.l-chap__art { position: static; display: grid; place-items: center; }
+.l-chap__art .char { width: min(100%, 420px); }
+.char--sm svg { width: auto; height: clamp(150px, 40vh, 380px); }
+.l-chap__sig { display: inline-grid; place-items: center; width: 34px; height: 34px; margin-left: 6px; border: 1px solid var(--line); border-radius: 10px; }
+.l-chap__sig .motif { width: 20px; height: 20px; color: var(--accent); }
+.threadline { position: absolute; inset: auto 0 0; height: 2px; background: var(--line); overflow: hidden; }
+.threadline i { position: absolute; inset: 0; background: var(--accent); transform-origin: left; }
+
+/* =============================================================
+   4. LINHA DO TEMPO
+   ============================================================= */
+.l-time { display: grid; gap: clamp(18px, 3vh, 40px); }
+.l-time__track { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: clamp(8px, 1vw, 20px); }
+.l-time__track::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 34px; height: 1px;
+  background: repeating-linear-gradient(90deg, var(--line-2) 0 5px, transparent 5px 12px);
+}
+.l-time__n { position: relative; display: grid; gap: 10px; align-content: start; }
+.l-time__d {
+  width: 15px; height: 15px; border-radius: 50%; border: 2px solid var(--accent);
+  background: var(--bg); margin-top: 27px; position: relative; z-index: 1;
+  transition: transform .5s var(--e-back), box-shadow .5s;
+}
+.l-time__n:hover .l-time__d { transform: scale(1.4); box-shadow: 0 0 0 6px color-mix(in oklab, var(--accent) 18%, transparent); }
+.l-time__p { font-family: 'Martian Mono', monospace; font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.l-time__h { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: clamp(.95rem, 1.35vw, 1.22rem); line-height: 1.05; letter-spacing: -.01em; }
+.l-time__x { font-size: 1.1rem; line-height: 1.48; color: var(--fg-soft); }
+
+
+
+/* =============================================================
+   5. GALERIA DE TEXTURAS / TRAÇOS
+   ============================================================= */
+.l-gal { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: clamp(7px, .7vw, 14px); }
+.l-gal__c {
+  position: relative; padding: clamp(11px, 1vw, 18px); border-radius: var(--r);
+  border: 1px solid var(--line); background: var(--card); overflow: hidden;
+  display: grid; gap: 5px; align-content: start; justify-items: start;
+  transition: transform .5s var(--e-out), border-color .4s, background .4s;
+}
+.l-gal__c > .l-gal__k, .l-gal__c > .l-gal__t, .l-gal__c > .l-gal__d { justify-self: stretch; }
+.l-gal__c:hover { transform: translateY(-6px); border-color: color-mix(in oklab, var(--accent) 50%, var(--line)); }
+.l-gal__c--up { transform: translateY(-14px); }
+.l-gal__c--up:hover { transform: translateY(-20px); }
+.l-gal__ic { width: clamp(38px, 4vw, 58px); color: var(--accent); }
+/* retrato de cabelo: mesmo rosto e mesmo desenho dos personagens.
+   Altura contida para os seis cards caberem em duas linhas. */
+.l-gal__ic--face {
+  display: block; width: clamp(80px, 8.4vw, 128px); height: clamp(104px, 13.5vh, 156px);
+  color: initial; margin: 0 auto 2px;
+}
+.l-gal__ic--face .hair-swatch { width: 100%; height: 100%; display: block; }
+.l-gal__t { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: -.01em; }
+.l-gal__d { font-size: 1.12rem; line-height: 1.42; color: var(--fg-soft); }
+.l-gal__k { font-family: 'Martian Mono', monospace; font-size: 12.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--fg-dim); }
+
+/* =============================================================
+   6. CITAÇÃO
+   ============================================================= */
+.l-quote { display: grid; gap: clamp(18px, 3vh, 40px); justify-items: start; }
+.l-quote__q {
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800;
+  font-size: clamp(1.9rem, 5.4vw, 5rem); line-height: .96; letter-spacing: -.04em; max-width: 20ch;
+}
+.l-quote__q em { font-style: normal; color: var(--accent); }
+.l-quote__c { display: flex; align-items: center; gap: 14px; }
+.l-quote__c .char { width: clamp(64px, 7vw, 96px); }
+.l-quote__b { display: grid; gap: 4px; }
+.l-quote__b strong { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 1.1rem; }
+.l-quote__b span { font-family: 'Martian Mono', monospace; font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg-dim); }
+
+
+
+
+/* =============================================================
+   7. AJUSTES
+   ============================================================= */
+@media (max-width: 1080px) {
+  .l-cover { grid-template-columns: minmax(0, 1fr); }
+  .l-cover__cast { order: -1; max-width: 460px; }
+  .l-chap { grid-template-columns: minmax(0, 1fr); }
+  .l-chap__art { order: -1; max-width: 340px; margin-inline: auto; }
+  .l-2col, .l-2col--wide, .l-2col--art, .l-tone { grid-template-columns: minmax(0, 1fr); }
+  .l-toc { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .l-time__track { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .l-time__track::before { left: 7px; right: auto; top: 0; bottom: 0; width: 1px; height: auto;
+    background: repeating-linear-gradient(180deg, var(--line-2) 0 5px, transparent 5px 12px); }
+  .l-time__n { grid-template-columns: 30px minmax(0, 1fr); gap: 0 14px; align-items: baseline; padding-bottom: 12px; }
+  .l-time__d { grid-row: span 3; margin-top: 5px; }
+  .l-gal { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .l-gal__c--up { transform: none; }
+  .l-steps { grid-template-columns: minmax(0, 1fr); }
+  .ghost { font-size: 22rem; }
+  .orn--side { display: none; }
+}
+@media (max-width: 780px) {
+  .l-toc, .l-gal { grid-template-columns: minmax(0, 1fr); }
+  .l-tone__bar { flex-wrap: wrap; }
+  .l-tone__sw { min-width: 26%; }
+  .l-tone__sw:nth-child(n) { height: clamp(90px, 16vh, 140px); }
+  .l-cover__cast .char:nth-child(n) { width: 100%; }
+  .l-quote__q { font-size: clamp(1.6rem, 8vw, 2.4rem); }
+  .l-chap__art .char { width: auto; height: clamp(170px, 32vh, 290px); }
+  .l-chap__art .char svg { width: auto; height: 100%; }
+  .l-chap__d .chip { font-size: 10.5px; padding: 6px 10px; }
+}
+
+/* =============================================================
+   8. BLOCOS NOVOS — frases, duplas, faixa, proporção, venn
+   ============================================================= */
+.l-stack { counter-reset: lstep; }
+.l-line {
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 600;
+  font-size: clamp(1.15rem, 2.15vw, 2rem); line-height: 1.22; letter-spacing: -.022em;
+  max-width: 34ch; margin: 0;
+  counter-increment: lstep;
+}
+.l-line em { font-style: italic; font-weight: 400; color: var(--accent); }
+.l-line--mid { font-size: clamp(1.05rem, 1.6vw, 1.5rem); max-width: 32ch; }
+.l-line--big { font-size: clamp(1.05rem, 1.75vw, 1.6rem); max-width: 30ch; }
+.l-line--tight { font-size: clamp(.98rem, 1.3vw, 1.15rem); font-weight: 500; max-width: 40ch; }
+/* o marcador virou numero: tres tracos amarelos empilhados
+   pareciam rabisco solto e sujavam a tela */
+.l-line::before {
+  content: counter(lstep, decimal-leading-zero);
+  display: block; font-family: 'Martian Mono', monospace; font-size: 12px;
+  font-weight: 500; letter-spacing: .18em; color: var(--accent); margin-bottom: 10px;
+}
+.l-note { font-size: 1.12rem; line-height: 1.5; color: var(--fg-dim); max-width: 56ch; margin: 0; }
+.l-note strong { color: var(--fg-soft); font-weight: 500; }
+.l-note em { font-style: italic; color: var(--accent); }
+
+/* pares "X ou Y" */
+.l-duo { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.l-duo__i { display: grid; gap: 6px; padding: clamp(12px, 1.4vw, 22px); background: var(--bg); }
+.l-duo__k { font-family: 'Martian Mono', monospace; font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.l-duo__v { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: clamp(.98rem, 1.6vw, 1.45rem); line-height: 1.1; letter-spacing: -.02em; }
+.l-duo__v i { font-style: italic; font-weight: 400; color: var(--fg-dim); }
+
+/* faixa de tons */
+.l-strip { display: flex; gap: 4px; height: clamp(110px, 20vh, 190px); }
+.l-strip__i { position: relative; flex: 1 1 0; background: var(--c); border-radius: 6px; animation: rise .8s var(--e-out) both; }
+.l-strip__i:nth-child(1) { animation-delay: .1s } .l-strip__i:nth-child(2) { animation-delay: .18s }
+.l-strip__i:nth-child(3) { animation-delay: .26s } .l-strip__i:nth-child(4) { animation-delay: .34s }
+.l-strip__i:nth-child(5) { animation-delay: .42s } .l-strip__i:nth-child(6) { animation-delay: .5s }
+.l-strip__i b {
+  position: absolute; inset: auto 0 0; padding: 8px 4px; text-align: center;
+  font-family: 'Martian Mono', monospace; font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
+  color: #fff; background: linear-gradient(transparent, rgb(0 0 0 / .5)); text-shadow: 0 1px 3px rgb(0 0 0 / .5);
+}
+
+/* proporção (gráfico) */
+.l-bar-wrap { display: grid; gap: 14px; }
+.l-proportion .chart { width: 100%; height: clamp(64px, 12vh, 116px); display: block; filter: drop-shadow(0 10px 24px rgb(0 0 0 / .35)); }
+.pf-seg { animation: growX 1.1s var(--e-out) both; animation-delay: var(--d); transform-box: fill-box; transform-origin: left; }
+@keyframes growX { from { transform: scaleX(.02) } to { transform: scaleX(1) } }
+.l-proportion__key { display: flex; flex-wrap: wrap; gap: 8px 26px; }
+.l-pk { display: inline-flex; align-items: center; gap: 9px; font-size: 1.12rem; color: var(--fg-soft); }
+.l-pk b { width: 14px; height: 14px; border-radius: 4px; background: var(--c); box-shadow: inset 0 0 0 1px rgb(255 255 255 / .18); }
+.l-pk i { font-style: normal; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; color: var(--fg); }
+
+/* =============================================================
+   12. LISTA NUMERADA
+   ============================================================= */
+/* Cada item ganha um cartao com fundo proprio: antes o titulo e a
+   descricao ficavam soltos sobre o papel e sumiam no tema claro. */
+.l-list { display: grid; gap: clamp(8px, 1.1vh, 14px); }
+.l-list__i {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(10px, 1.2vw, 18px); align-items: start;
+  padding: clamp(11px, 1.3vh, 17px) clamp(12px, 1.2vw, 18px);
+  border: 1px solid var(--line); border-left: 3px solid color-mix(in oklab, var(--accent) 55%, transparent);
+  border-radius: 10px; background: var(--card);
+  transition: transform .4s var(--e-out), border-color .3s, background .3s;
+}
+.l-list__i:hover { transform: translateX(5px); border-left-color: var(--accent); }
+.l-list__i:hover .l-list__n { color: var(--accent); }
+.l-list__n { font-family: 'Martian Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: .14em; color: var(--fg-dim); transition: color .3s; padding-top: 3px; }
+.l-list__t { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: clamp(1.08rem, 1.6vw, 1.45rem); line-height: 1.12; letter-spacing: -.012em; color: var(--fg); }
+.l-list__d { font-size: 1.08rem; color: var(--fg-soft); margin-top: 5px; line-height: 1.48; }
+[data-theme='light'] .l-list__d { color: #3A2E24; }
+
+/* =============================================================
+   13. BOTÃO E BIBLIOGRAFIA
+   ============================================================= */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px;
+  border: 1px solid var(--line-2); border-radius: 999px; text-decoration: none;
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 600; font-size: 1rem;
+  transition: .35s var(--e-out);
+}
+.btn svg { width: 16px; height: 16px; flex: none; }
+.btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
+.btn--a { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.btn--a:hover { color: var(--bg); filter: brightness(1.08); }
+
+.biblio { display: grid; gap: 4px; width: 100%; }
+.biblio__i { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 14px; align-items: baseline; padding: 7px 0; border-bottom: 1px dashed var(--line); }
+.biblio__i b { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 600; font-size: 1.12rem; }
+.biblio__i span { font-size: 1.04rem; color: var(--fg-dim); }
+.biblio--2 { grid-template-columns: repeat(2, minmax(0,1fr)); column-gap: clamp(20px, 3vw, 48px); }
+.biblio--2 .biblio__i { grid-template-columns: 1fr; gap: 2px; }
+@media (max-width: 780px) { .biblio__i { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+@media (max-width: 1080px) { .biblio--2 { grid-template-columns: minmax(0,1fr); } }
+
+/* =============================================================
+   14. COMPARAÇÃO GRANDE (substitui o diagrama de círculos)
+   ============================================================= */
+.l-cmp-big { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: clamp(12px, 1.6vw, 26px); width: 100%; }
+.l-cmp-big__c {
+  position: relative; display: grid; gap: 10px; align-content: start;
+  padding: clamp(20px, 2.2vw, 34px); border-radius: var(--r-lg);
+  border: 1px solid var(--line); background: var(--card); overflow: hidden;
+}
+.l-cmp-big__c::before { content: ''; position: absolute; inset: 0 0 auto; height: 5px; background: var(--k); }
+.l-cmp-big__c--a { --k: var(--accent); }
+.l-cmp-big__c--b { --k: var(--accent-2); }
+.l-cmp-big__k { font-family: 'Martian Mono', monospace; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--k); }
+.l-cmp-big__c h4 { font-size: clamp(1.6rem, 3vw, 2.6rem); letter-spacing: -.03em; }
+.l-cmp-big__c p { font-size: clamp(1.05rem, 1.4vw, 1.24rem); line-height: 1.48; color: var(--fg-soft); margin: 0; }
+/* No tema claro o fundo era 10% de ambar sobre creme: o texto ficava
+   apagado. Aqui a caixa e sempre um painel solido com texto escuro. */
+.l-cmp-big__both {
+  display: grid; gap: 8px; align-content: start;
+  padding: clamp(16px, 2vw, 28px); border-radius: var(--r);
+  border: 1px solid color-mix(in oklab, var(--accent) 55%, var(--line));
+  background: color-mix(in oklab, var(--accent) 13%, var(--card));
+  box-shadow: inset 4px 0 0 var(--accent);
+}
+.l-cmp-big__t { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(1.2rem, 2.1vw, 1.85rem); letter-spacing: -.02em; color: var(--accent); }
+.l-cmp-big__both p { font-size: clamp(1.02rem, 1.3vw, 1.16rem); line-height: 1.5; color: var(--fg); margin: 0; max-width: 78ch; }
+[data-theme='light'] .l-cmp-big__both { background: color-mix(in oklab, var(--accent) 16%, #FFFDF7); }
+[data-theme='light'] .l-cmp-big__both p { color: #1B1410; }
+@media (max-width: 780px) { .l-cmp-big { grid-template-columns: minmax(0,1fr); } }
+
+/* dois painéis */
+.l-two { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: clamp(12px, 1.4vw, 22px); }
+.l-panel { position: relative; padding: clamp(18px, 2vw, 30px); border-radius: var(--r-lg); border: 1px solid var(--line); background: var(--card); display: grid; gap: 10px; align-content: start; overflow: hidden; }
+.l-panel::after { content: ''; position: absolute; inset: auto 0 0; height: 3px; background: var(--k); }
+.l-panel .motif { width: 30px; height: 30px; color: var(--k); }
+.l-panel h4 { font-size: clamp(1.2rem, 2vw, 1.75rem); }
+.l-panel p { font-size: 1.12rem; color: var(--fg-soft); margin: 0; max-width: 34ch; }
+.l-panel--a { --k: var(--accent); }
+.l-panel--b { --k: var(--accent-2); }
+
+/* card de citação grande */
+.l-card-lg { position: relative; padding: clamp(20px, 2.2vw, 34px); border: 1px solid var(--line); border-radius: var(--r-lg); background: color-mix(in oklab, var(--accent) 8%, var(--card)); display: grid; gap: 14px; }
+.l-card-lg .motif { width: 34px; height: 34px; color: var(--accent); }
+.l-card-lg__q { margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 600; font-size: clamp(1.1rem, 1.9vw, 1.6rem); line-height: 1.22; letter-spacing: -.02em; max-width: 26ch; }
+
+/* pôster */
+.l-poster { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin: 0; }
+.l-poster__n {
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; letter-spacing: -.05em;
+  font-size: clamp(3.4rem, 10vw, 9rem); line-height: .8; color: var(--accent);
+}
+.l-poster__y { font-family: 'Martian Mono', monospace; font-size: 12.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--fg-dim); }
+
+/* encerramento limpo */
+.l-end-clean { display: grid; justify-items: center; text-align: center; gap: clamp(8px, 1.4vh, 18px); align-content: center; }
+.l-end-clean__a { font-family: 'Martian Mono', monospace; font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: var(--fg-dim); }
+.l-end-clean__t { font-size: clamp(3rem, 11vw, 9rem); line-height: .84; }
+.l-end-clean__t span { color: var(--accent); }
+.l-end-clean__s { font-family: 'Newsreader', serif; font-style: italic; font-weight: 300; font-size: clamp(1.05rem, 1.9vw, 1.6rem); color: var(--fg-soft); margin: 0; }
+.l-end-clean__cast { display: flex; align-items: flex-end; justify-content: center; gap: clamp(4px, 1vw, 20px); margin-top: clamp(6px, 1.4vh, 20px); }
+.l-end-clean__cast .char { flex: 0 1 auto; }
+.l-end-clean__cast .char svg { width: auto; height: clamp(120px, 26vh, 250px); }
+.l-end-clean__hint { font-family: 'Martian Mono', monospace; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--fg-dim); margin: 0; }
+
+/* índice com 7 */
+.l-toc--7 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+.l-toc--7 .l-toc__c { gap: 6px; }
+.l-toc--7 .l-toc__t { font-size: clamp(.98rem, 1.35vw, 1.28rem); }
+.l-toc__c--go { border-style: dashed; }
+
+/* bibliografia em duas colunas */
+.biblio--2 { grid-template-columns: repeat(2, minmax(0,1fr)); column-gap: clamp(20px, 3vw, 48px); }
+.biblio--2 .biblio__i { grid-template-columns: 1fr; gap: 2px; }
+
+/* ciclo e constelação foram removidos: os diagramas agora são HTML (.l-loop, .l-raiz) */
+
+@media (max-width: 1080px) {
+  .l-duo { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .l-toc--7 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .biblio--2 { grid-template-columns: minmax(0,1fr); }
+}
+@media (max-width: 700px) {
+  .l-duo, .l-two { grid-template-columns: minmax(0,1fr); }
+  .l-toc--7 { grid-template-columns: minmax(0,1fr); }
+  .l-strip { height: auto; flex-wrap: wrap; gap: 4px; }
+  .l-strip__i { flex: 1 1 28%; height: 62px; }
+  .l-strip__i b { font-size: 9.5px; letter-spacing: .06em; }
+}
+/* telas estreitas: aperta o ritmo vertical para a cena caber sem corte.
+   O corpo do texto NAO encolhe: projetor precisa de letra grande. */
+@media (max-width: 560px) {
+  .l-stack, .l-head { gap: 10px; }
+  .l-cards { gap: 8px; }
+  .l-card-i { padding: 12px 13px; gap: 5px; }
+  .l-card-i__t { font-size: 1.04rem; }
+  .l-card-i__d { font-size: 1rem; line-height: 1.4; }
+  .l-raiz { gap: 8px; }
+  .l-raiz__i { padding: 10px 12px; }
+  .l-raiz__t { font-size: 1rem; }
+  .l-raiz__d { font-size: .98rem; line-height: 1.4; }
+  .l-note { font-size: .98rem; }
+  .l-gal__d { font-size: 1rem; line-height: 1.4; }
+}
+/* fatos curtos com ilustração */
+.l-facts { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: clamp(16px, 2.4vw, 40px); align-items: center; }
+.l-facts__a .art { width: min(100%, 240px); color: var(--accent); }
+.l-facts__l { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.l-facts__l li {
+  padding: 0 0 10px 22px;
+  border-bottom: 1px dashed var(--line); position: relative;
+  font-size: 1.08rem; color: var(--fg-soft);
+}
+.l-facts__l li::before { content: ''; position: absolute; left: 0; top: 12px; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+.l-facts__l b { color: var(--fg); font-weight: 600; }
+@media (max-width: 700px) { .l-facts { grid-template-columns: minmax(0,1fr); } }
+
+
+/* três painéis em linha */
+.l-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: clamp(12px, 1.4vw, 22px); width: 100%; }
+.l-3 .l-panel p { max-width: none; }
+.l-3 .l-panel h4 { font-size: clamp(1.12rem, 1.7vw, 1.5rem); }
+@media (max-width: 1080px) { .l-3 { grid-template-columns: minmax(0,1fr); } }
+
+/* =============================================================
+   15. CICLO EM PASSOS (substitui o diagrama radial)
+   ============================================================= */
+.l-loop { display: grid; gap: clamp(10px, 1.4vh, 18px); width: 100%; }
+.l-loop__g { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: clamp(8px, 1vw, 16px); }
+.l-loop__i {
+  position: relative; display: grid; gap: 6px; align-content: start;
+  padding: clamp(14px, 1.6vw, 24px); border: 1px solid var(--line-2); border-radius: var(--r);
+  background: var(--card); overflow: hidden;
+}
+.l-loop__i::after { content: ''; position: absolute; inset: auto 0 0; height: 3px; background: var(--k); }
+.l-loop__i:nth-child(1) { --k: var(--accent); }
+.l-loop__i:nth-child(2) { --k: color-mix(in oklab, var(--accent) 70%, var(--accent-2)); }
+.l-loop__i:nth-child(3) { --k: color-mix(in oklab, var(--accent-2) 70%, var(--accent)); }
+.l-loop__i:nth-child(4) { --k: var(--accent-2); }
+.l-loop__n {
+  font-family: 'Martian Mono', monospace; font-size: 12px; letter-spacing: .18em;
+  color: var(--k); font-weight: 600;
+}
+.l-loop__t { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(1.1rem, 1.8vw, 1.55rem); line-height: 1.05; letter-spacing: -.02em; }
+.l-loop__d { font-size: 1.12rem; line-height: 1.45; color: var(--fg-soft); margin: 0; }
+.l-loop__back {
+  display: flex; align-items: center; gap: 12px; margin: 0;
+  padding: clamp(10px, 1.2vw, 16px) clamp(14px, 1.6vw, 22px);
+  border: 1px dashed color-mix(in oklab, var(--accent) 55%, var(--line));
+  border-radius: var(--r); background: color-mix(in oklab, var(--accent) 9%, transparent);
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700;
+  font-size: clamp(1rem, 1.5vw, 1.3rem); color: var(--accent);
+}
+.l-loop__back svg { width: 26px; height: 26px; flex: none; animation: spin 14s linear infinite; }
+
+/* =============================================================
+   16. CARTÕES DE CONTEÚDO (2x2 legível)
+   ============================================================= */
+.l-cards { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: clamp(10px, 1.2vw, 20px); width: 100%; }
+.l-card-i {
+  position: relative; display: grid; gap: 7px; align-content: start;
+  padding: clamp(15px, 1.7vw, 26px); border: 1px solid var(--line); border-radius: var(--r);
+  background: var(--card); border-left: 3px solid var(--k);
+}
+.l-card-i--a { --k: var(--accent); }
+.l-card-i--b { --k: var(--accent-2); }
+.l-card-i__k { font-family: 'Martian Mono', monospace; font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--k); }
+.l-card-i__t { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(1.08rem, 1.7vw, 1.45rem); line-height: 1.06; letter-spacing: -.02em; }
+.l-card-i__d { font-size: 1.12rem; line-height: 1.45; color: var(--fg-soft); margin: 0; }
+
+/* =============================================================
+   17. PILARES DA IDENTIDADE
+   ============================================================= */
+.l-raiz { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: clamp(8px, 1vw, 16px); width: 100%; }
+.l-raiz__i {
+  display: grid; gap: 8px; align-content: start;
+  padding: clamp(14px, 1.6vw, 24px); border: 1px solid var(--line); border-radius: var(--r);
+  background: var(--card); transition: transform .45s var(--e-out), border-color .4s;
+}
+.l-raiz__i:hover { transform: translateY(-5px); border-color: color-mix(in oklab, var(--accent) 55%, var(--line)); }
+.l-raiz__i .motif { width: 30px; height: 30px; color: var(--accent); }
+.l-raiz__t { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(1.05rem, 1.6vw, 1.4rem); line-height: 1.05; letter-spacing: -.02em; }
+.l-raiz__d { font-size: 1.1rem; line-height: 1.45; color: var(--fg-soft); margin: 0; }
+
+@media (max-width: 1080px) {
+  .l-loop__g, .l-cards { grid-template-columns: minmax(0,1fr); }
+  .l-raiz { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 700px) {
+  .l-raiz { grid-template-columns: minmax(0,1fr); }
+}

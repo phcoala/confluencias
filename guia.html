@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark" data-chapter="capa" data-cloth="arch">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guia — Confluências</title>
+<meta name="description" content="Orientações de fala, teclas e referências da apresentação Confluências.">
+<meta name="theme-color" content="#0A0810">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="assets/css/slides.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A0810'/%3E%3Cg fill='none' stroke='%23E5A83A' stroke-width='5' stroke-linecap='round'%3E%3Cpath d='M30 44Q10 44 10 24Q10 8 26 8Q36 8 36 20'/%3E%3Cpath d='M34 44Q54 44 54 24Q54 8 38 8Q28 8 28 20'/%3E%3Cpath d='M23 50h18'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+  body { overflow: auto; }
+  .doc { position: relative; z-index: 1; }
+  .cloth.on { opacity: .055; }
+  [data-theme='light'] .cloth.on { opacity: .04; }
+  .cloth--2.on { opacity: .09; }
+  .cloth--3 { position: fixed; }
+  .cloth--3.on { opacity: .1; }
+  [data-theme='light'] .cloth--3.on { opacity: .09; }
+  kbd { font-family: 'Martian Mono', monospace; font-size: .88em; letter-spacing: .04em;
+    border: 1px solid var(--line-2); border-bottom-width: 2px; border-radius: 6px;
+    padding: 2px 6px; color: var(--fg); background: color-mix(in oklab, var(--fg) 8%, transparent); white-space: nowrap; }
+  code { font-family: 'Martian Mono', monospace; font-size: .84em; border: 1px solid var(--line);
+    border-radius: 5px; padding: 1px 5px; background: color-mix(in oklab, var(--fg) 7%, transparent); color: var(--accent); }
+  .doc__top { position: sticky; top: 0; z-index: 30; display: flex; align-items: center;
+    justify-content: space-between; gap: 16px; padding: 12px var(--pad-x);
+    background: color-mix(in oklab, var(--bg) 90%, transparent); border-bottom: 1px solid var(--line); }
+  .wrap { width: min(1060px, 100%); margin-inline: auto; padding: clamp(24px, 4vw, 60px) var(--pad-x) 80px; }
+  .sec { display: grid; gap: clamp(12px, 1.8vw, 22px); padding-block: clamp(26px, 4vw, 52px); border-top: 1px solid var(--line); }
+  .sec:first-of-type { border-top: 0; }
+  .sec__n { font-family: 'Martian Mono', monospace; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
+  .sec h2 { font-size: clamp(1.45rem, 3.2vw, 2.5rem); }
+  .sec p { color: var(--fg-soft); max-width: 68ch; font-size: 1.06rem; }
+  .sec p strong, .sec li strong { color: var(--fg); font-weight: 500; }
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: clamp(12px, 1.4vw, 20px); }
+  .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: clamp(12px, 1.4vw, 20px); }
+  table { width: 100%; border-collapse: collapse; font-size: 1rem; }
+  thead th { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line-2);
+    font-family: 'Martian Mono', monospace; font-size: 11.5px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--fg-dim); font-weight: 400; }
+  tbody td { padding: 11px 12px; border-bottom: 1px dashed var(--line); vertical-align: top; color: var(--fg-soft); }
+  tbody tr:hover td { background: color-mix(in oklab, var(--accent) 7%, transparent); }
+  .do-n { font-family: 'Martian Mono', monospace; font-size: 11.5px; color: var(--accent); }
+  td.n { font-family: 'Martian Mono', monospace; font-size: 12px; color: var(--accent); white-space: nowrap; }
+  td.t { color: var(--fg); font-weight: 500; }
+  td.t a { text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--accent) 45%, transparent); }
+  td.t a:hover { color: var(--accent); }
+  .do p { margin: 0; font-size: 1rem; }
+  td.tm { font-family: 'Martian Mono', monospace; font-size: 12px; white-space: nowrap; }
+  .tblwrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r); background: var(--card); }
+  .ref { display: grid; gap: 8px; }
+  .ref__i { display: grid; gap: 3px; padding: 11px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+  .ref__i b { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: .98rem; }
+  .ref__i span { font-size: .98rem; color: var(--fg-dim); }
+  .callout { padding: clamp(14px, 1.6vw, 20px); border: 1px solid color-mix(in oklab, var(--accent) 38%, var(--line));
+    border-radius: var(--r); background: color-mix(in oklab, var(--accent) 7%, transparent); }
+  .callout h3 { font-size: 1rem; margin-bottom: 8px; }
+  .callout ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; font-size: 1rem; color: var(--fg-soft); }
+  .callout li::marker { color: var(--accent); }
+  .do { display: grid; gap: 5px; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+  .do b { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.06rem; }
+  
+  .foot { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between;
+    padding-top: 24px; border-top: 1px solid var(--line); }
+  .motif-big { color: var(--accent); }
+  .sym { display: grid; grid-template-columns: 52px 1fr; gap: 14px 18px; align-items: center; }
+  .sym .motif { width: 44px; height: 44px; }
+  .sym b { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 1.08rem; }
+  .sym span { display: block; font-size: 1rem; color: var(--fg-dim); }
+  .teclas { display: grid; gap: 4px; align-content: start; padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+  .teclas__t { font-family: 'Martian Mono', monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); font-weight: 400; padding-bottom: 10px; margin-bottom: 6px; border-bottom: 1px solid var(--line); }
+  .teclas div { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 12px; align-items: center; padding: 5px 0; }
+  .teclas kbd { justify-self: start; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+  .teclas span { font-size: 1.02rem; color: var(--fg-soft); }
+  @media (max-width: 560px) { .teclas div { grid-template-columns: 96px minmax(0, 1fr); } }
+  @media (max-width: 700px) {
+    .tblwrap { border: 0; background: none; }
+    thead { display: none; }
+    tbody tr { display: grid; gap: 4px; padding: 12px 0; border-bottom: 1px dashed var(--line); }
+    tbody td { border: 0; padding: 0; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-l" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2Z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7"/></symbol>
+  <symbol id="i-r" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5Z"/><path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H20v3H6.5A2.5 2.5 0 0 1 4 20.5Z"/></symbol>
+</svg>
+
+<div class="bg" aria-hidden="true">
+  <div class="bg__base"></div>
+  <div class="cloth" data-pat="arch"></div>
+  <div class="cloth cloth--2" data-pat="dots"></div>
+  <div class="cloth--3" id="bgmark"></div>
+  <div class="aurora"></div>
+  <div class="grain"></div>
+  <div class="vign"></div>
+</div>
+
+<div class="doc">
+  <div class="doc__top">
+    <a class="btn" href="index.html"><svg><use href="#i-l"/></svg> Voltar</a>
+    <button class="tbtn" id="theme" type="button" aria-pressed="false" aria-label="Alternar tema"><svg><use href="#i-moon"/></svg></button>
+  </div>
+
+  <div class="wrap">
+
+    <header class="sec" style="border-top:0">
+      <span class="sec__n">Guia</span>
+      <h1 class="t-lg">Para quem <span class="em">vai apresentar</span>.</h1>
+      <p class="lede" style="font-size:1.08rem">A apresentação fica com vocês. Este guia reúne as orientações, as teclas e a lista de referências. Para ver a fala pronta de cada cena, use a tecla <kbd>N</kbd> durante a apresentação.</p>
+      <div class="l-cover__band">
+        <a class="btn btn--a" href="index.html"><svg><use href="#i-r"/></svg> Abrir a apresentação</a>
+      </div>
+    </header>
+
+    <section class="sec">
+      <div class="sec__n">01 · Cuidados</div>
+      <h2>O que evitar</h2>
+      <div class="grid2">
+        <div class="do"><span class="do-n">01</span><b>Tratar um traço como lista</b><p>Não descrever uma característica física como se fosse característica de todo o grupo.</p></div>
+        <div class="do"><span class="do-n">02</span><b>Tratar alisamento como culpa</b><p>Alisar, trançar ou deixar natural é escolha de cada pessoa. O problema é a pressão.</p></div>
+        <div class="do"><span class="do-n">03</span><b>Falar de um penteado genérico</b><p>Cada povo africano tem os seus. Uma trança significa coisas diferentes em cada cultura.</p></div>
+        <div class="do"><span class="do-n">04</span><b>Organizar tons de cor em hierarquia</b><p>Nenhum tom é o melhor. E cor ou raça do IBGE é autodeclaração, não medição.</p></div>
+        <div class="do"><span class="do-n">05</span><b>Afirmar que representatividade resolve o racismo</b><p>Não resolve. Representatividade amplia o que é considerado possível.</p></div>
+        <div class="do"><span class="do-n">06</span><b>Falar de um padrão europeu único</b><p>Não existe um. Existe um padrão que foi imposto e que virou referência.</p></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec__n">02 · Teclas</div>
+      <h2>Navegação</h2>
+      <div class="grid3">
+        <div class="teclas">
+          <b class="teclas__t">Cenas</b>
+          <div><kbd>→</kbd><span>Próxima cena</span></div>
+          <div><kbd>←</kbd><span>Cena anterior</span></div>
+          <div><kbd>G</kbd><span>Abrir e fechar o índice</span></div>
+          <div><kbd>Esc</kbd><span>Fechar janela</span></div>
+        </div>
+        <div class="teclas">
+          <b class="teclas__t">Na hora</b>
+          <div><kbd>N</kbd><span>Anotações</span></div>
+          <div><kbd>R</kbd><span>Mostrar o tempo</span></div>
+          <div><kbd>clique</kbd><span>No tempo, para zerar</span></div>
+        </div>
+        <div class="teclas">
+          <b class="teclas__t">Tela</b>
+          <div><kbd>T</kbd><span>Tema claro e escuro</span></div>
+          <div><kbd>F</kbd><span>Tela cheia</span></div>
+          <div><kbd>dedo</kbd><span>Deslizar, no celular</span></div>
+        </div>
+      </div>
+      <p class="l-note" style="margin-top:14px">A roda do mouse e o trackpad também mudam de cena. No celular, deslize o dedo na horizontal.</p>
+    </section>
+
+    <section class="sec">
+      <div class="sec__n">03 · Referências</div>
+      <h2>Fontes</h2>
+      <div class="ref">
+        <div class="ref__i"><b>IBGE — Censo Demográfico 2022</b><span>45,3% se declararam parda e 10,2% preta. Base do gráfico da cena 8.</span></div>
+        <div class="ref__i"><b>IBGE — Características étnico-raciais da população</b><span>Cor ou raça como autodeclaração, não como medida.</span></div>
+        <div class="ref__i"><b>Neusa Santos Souza — <i>Tornar-se Negro</i> (1983)</b><span>Identidade negra e os efeitos do racismo.</span></div>
+        <div class="ref__i"><b>Frantz Fanon — <i>Pele Negra, Máscaras Brancas</i> (1952)</b><span>Citado na cena 14.</span></div>
+        <div class="ref__i"><b>Ayana Byrd e Lori Tharps — <i>Hair Story</i></b><span>Cabelos negros nos Estados Unidos: penteados, alisamento, política.</span></div>
+        <div class="ref__i"><b>Emma Dabiri — <i>Don't Touch My Hair</i></b><span>Cabelo, diáspora e identidade.</span></div>
+        <div class="ref__i"><b>Nilma Lino Gomes — <i>Sem Perder a Raiz</i></b><span>O cabelo negro como corpo social e político.</span></div>
+        <div class="ref__i"><b>Giovana Xavier — <i>História Social da Beleza Negra</i></b><span>História dos padrões estéticos negros no Brasil.</span></div>
+        <div class="ref__i"><b>Amanda Batista Braga — <i>História da Beleza Negra no Brasil</i></b><span>Violência estética da escravidão e resistência.</span></div>
+        <div class="ref__i"><b>Alice Walker</b><span>Consolidou o termo <i>colorism</i>.</span></div>
+        <div class="ref__i"><b>Chimamanda Ngozi Adichie — <i>Americanah</i></b><span>Romance. Complemento para discutir cabelo e identidade.</span></div>
+        <div class="ref__i"><b>Lei nº 10.639/2003</b><span>Ensino obrigatório de História e Cultura Afro-Brasileira e Africana.</span></div>
+        <div class="ref__i"><b>Pesquisas da UnB e da UERJ</b><span>Cabelo, identidade e representação — inclui o estudo com jovens negros de Belo Horizonte (cena 13).</span></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec__n">04 · Desenhos</div>
+      <h2>Os personagens</h2>
+      <p>Os personagens são vetores desenhados para este site. Cada um tem um tom de pele, um tipo de cabelo, uma roupa e uma pose próprios, e há mulheres, homens e pessoas de origens diferentes.</p>
+      <p>As tramas do fundo são desenhos geométricos em SVG, inspirados em tecidos africanos. As fotos da apresentação vêm de fora e estão isoladas no código, para poderem ser retiradas sem quebrar nada.</p>
+    </section>
+
+    <div class="foot">
+      <span class="meta">Confluências</span>
+      <a class="btn" href="index.html"><svg><use href="#i-book"/></svg> Ir para a apresentação</a>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/art.js"></script>
+<script>
+  (function () {
+    var root = document.documentElement;
+    var KEY = 'confluencias:theme';
+    function set(t) {
+      root.dataset.theme = t;
+      var b = document.getElementById('theme');
+      if (b) {
+        b.setAttribute('aria-pressed', String(t === 'light'));
+        var u = b.querySelector('use');
+        if (u) u.setAttribute('href', t === 'light' ? '#i-sun' : '#i-moon');
+      }
+      try { localStorage.setItem(KEY, t); } catch (e) {}
+    }
+    var t = null;
+    var q = (location.search.match(/tema=(claro|escuro)/) || [])[1];
+    if (q) t = q === 'claro' ? 'light' : 'dark';
+    if (!t) { try { t = localStorage.getItem(KEY); } catch (e) {} }
+    if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    set(t);
+    var b = document.getElementById('theme');
+    if (b) b.addEventListener('click', function () { set(root.dataset.theme === 'light' ? 'dark' : 'light'); });
+    /* T alterna o tema, igual à apresentação */
+    document.addEventListener('keydown', function (e) {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      var k = e.key;
+      if (k === 't' || k === 'T') { set(root.dataset.theme === 'light' ? 'dark' : 'light'); }
+      else if (k === 'f' || k === 'F') {
+        if (!document.fullscreenElement) {
+          (document.documentElement.requestFullscreen || function () {}).call(document.documentElement);
+        } else if (document.exitFullscreen) { document.exitFullscreen(); }
+      }
+    });
+    document.querySelectorAll('.cloth').forEach(function (el) { el.classList.add('on'); });
+    (function () {
+      var bg = document.getElementById('bgmark');
+      if (!bg) return;
+      var MARKS = ['kente', 'bogolan', 'aso', 'kuba', 'adire', 'lozenge'];
+      bg.innerHTML = MARKS.map(function (n) { return Art.motif(n); }).join('');
+      bg.classList.add('on');
+    })();
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { Art.mount(); });
+    else Art.mount();
+  })();
+</script>
+</body>
+</html>
